@@ -191,9 +191,9 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         db.add(db_user_update)
         db.commit()
         db.refresh(db_user_update)
-        return {"access_token": access_token, "token_type": "bearer","is_Login": 1}
+        return {"access_token": access_token, "token_type": "bearers"}
 
-    return {"access_token": access_token, "token_type": "bearer","is_Login": 0}
+    return {"access_token": access_token, "token_type": "bearerss"}
 
 
 @app.get("/users/me")

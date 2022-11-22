@@ -1,0 +1,147 @@
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+INFO:     Started reloader process [851687] using statreload
+INFO:     Started server process [851689]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     163.152.26.101:55613 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55613 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55613 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55653 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55653 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55653 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55728 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:55728 - "GET /users/me HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/uvicorn/protocols/http/h11_impl.py", line 170, in handle_events
+    event = self.conn.next_event()
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 443, in next_event
+    exc._reraise_as_remote_protocol_error()
+  File "/usr/lib/python3/dist-packages/h11/_util.py", line 76, in _reraise_as_remote_protocol_error
+    raise self
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 425, in next_event
+    event = self._extract_next_receive_event()
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 367, in _extract_next_receive_event
+    event = self._reader(self._receive_buffer)
+  File "/usr/lib/python3/dist-packages/h11/_readers.py", line 68, in maybe_read_from_IDLE_client
+    raise LocalProtocolError("illegal request line")
+h11._util.RemoteProtocolError: illegal request line
+INFO:     162.142.125.222:52626 - "GET / HTTP/1.1" 404 Not Found
+INFO:     162.142.125.222:59418 - "GET / HTTP/1.1" 404 Not Found
+INFO:     162.142.125.222:43910 - "PRI %2A HTTP/2.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/routing.py", line 735, in __call__
+    await self.default(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/routing.py", line 629, in not_found
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/uvicorn/protocols/http/h11_impl.py", line 170, in handle_events
+    event = self.conn.next_event()
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 443, in next_event
+    exc._reraise_as_remote_protocol_error()
+  File "/usr/lib/python3/dist-packages/h11/_util.py", line 76, in _reraise_as_remote_protocol_error
+    raise self
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 425, in next_event
+    event = self._extract_next_receive_event()
+  File "/usr/lib/python3/dist-packages/h11/_connection.py", line 367, in _extract_next_receive_event
+    event = self._reader(self._receive_buffer)
+  File "/usr/lib/python3/dist-packages/h11/_readers.py", line 72, in maybe_read_from_IDLE_client
+    matches = validate(
+  File "/usr/lib/python3/dist-packages/h11/_util.py", line 88, in validate
+    raise LocalProtocolError(msg)
+h11._util.RemoteProtocolError: illegal request line: bytearray(b'SM')
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+INFO:     Started reloader process [852381] using statreload
+INFO:     Started server process [852383]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     163.152.26.101:56160 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56160 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56160 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56177 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56177 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56228 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56228 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56235 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56235 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56267 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56267 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56310 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56310 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56515 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56515 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56547 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56547 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56590 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56596 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56611 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56611 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56625 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56625 - "POST /token HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/uvicorn/protocols/http/h11_impl.py", line 394, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/usr/lib/python3/dist-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/applications.py", line 270, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/applications.py", line 124, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/usr/local/lib/python3.9/dist-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/routing.py", line 706, in __call__
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.9/dist-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/routing.py", line 235, in app
+    raw_response = await run_endpoint_function(
+  File "/usr/local/lib/python3.9/dist-packages/fastapi/routing.py", line 161, in run_endpoint_function
+    return await dependant.call(**values)
+  File "./main.py", line 176, in login_for_access_token
+    user = authenticate_user(db, form_data.username, form_data.password)
+  File "./main.py", line 130, in authenticate_user
+    if not verify_password(password, user.hashed_password):
+  File "./main.py", line 116, in verify_password
+    return pwd_context.verify(plain_password, hashed_password)
+  File "/usr/local/lib/python3.9/dist-packages/passlib/context.py", line 2343, in verify
+    record = self._get_or_identify_record(hash, scheme, category)
+  File "/usr/local/lib/python3.9/dist-packages/passlib/context.py", line 2031, in _get_or_identify_record
+    return self._identify_record(hash, category)
+  File "/usr/local/lib/python3.9/dist-packages/passlib/context.py", line 1132, in identify_record
+    raise exc.UnknownHashError("hash could not be identified")
+passlib.exc.UnknownHashError: hash could not be identified
+INFO:     163.152.26.101:56637 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56637 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56637 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56665 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56669 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     163.152.26.101:56669 - "POST /token HTTP/1.1" 200 OK
+INFO:     163.152.26.101:56669 - "GET /users/me HTTP/1.1" 200 OK
