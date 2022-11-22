@@ -616,6 +616,8 @@ def update_user(db: Session, user: schemas.UserUpdate, current_user: schemas.Use
         if db_user_update:
             if user.email:
                 db_user_update.email = user.email
+            elif user.tokens:
+                db_user_update.tokens = "NULL"
             else:
                 db_user_update.is_staff = user.is_staff
             db.add(db_user_update)

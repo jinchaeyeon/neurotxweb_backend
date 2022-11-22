@@ -185,7 +185,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
 
-    if user.tokens != NULL and access_token != user.tokens:
+    if user.tokens != "NULL" and access_token != user.tokens:
         db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
         db_user_update.tokens = access_token
         db.add(db_user_update)
@@ -194,16 +194,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         return {"access_token": access_token, "token_type": "bearers"}
 
     return {"access_token": access_token, "token_type": "bearerss"}
-
-@app.post("/logout")
-async def logouts(db: Session = Depends(get_db)):
-    user = read_users_me()
-    db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
-    db_user_update.tokens = "NULL"
-    db.add(db_user_update)
-    db.commit()
-    db.refresh(db_user_update)
-    return {"access_token": "NULL", "token_type": "bearer"}
 
 @app.get("/users/me")
 async def read_users_me(current_user: schemas.User = Depends(get_current_user)):
