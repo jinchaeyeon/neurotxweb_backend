@@ -324,6 +324,7 @@ class UserUpdate(BaseModel):
     is_staff: Optional[bool]
     first_name: Optional[str]
     last_name: Optional[str]
+    tokens: Optional[str]
 
 class UserBase(BaseModel):
     email: str
