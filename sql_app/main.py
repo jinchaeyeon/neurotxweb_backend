@@ -184,7 +184,16 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+
+    if access_token != user.tokens:
+        db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
+        db_user_update.tokens = access_token
+        db.add(db_user_update)
+        db.commit()
+        db.refresh(db_user_update)
+        return {"access_token": access_token, "token_type": "bearer","is_Login": 1}
+
+    return {"access_token": access_token, "token_type": "bearer","is_Login": 0}
 
 
 @app.get("/users/me")
