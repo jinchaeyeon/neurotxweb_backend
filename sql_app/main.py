@@ -26,16 +26,8 @@ import io
 import pandas
 import database
 import pymysql
-origins = ["*",
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://localhost:3001",
-]
+origins = ["*"]
 
-
-# to get a string like this run:
-# openssl rand -hex 32
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
@@ -78,9 +70,6 @@ def get_db():
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 99999
-
-
-
 
 @app.get("/get_csv/{protocol_exp_id}")
 async def get_csv(protocol_exp_id:int):
@@ -184,16 +173,20 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-
-    if user.tokens != "NULL" and access_token != user.tokens:
+    if access_token == user.tokens or user.tokens == "NULL":
         db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
         db_user_update.tokens = access_token
         db.add(db_user_update)
         db.commit()
         db.refresh(db_user_update)
         return {"access_token": access_token, "token_type": "bearers"}
-
-    return {"access_token": access_token, "token_type": "bearerss"}
+    else:
+        db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
+        db_user_update.tokens = "NULL"
+        db.add(db_user_update)
+        db.commit()
+        db.refresh(db_user_update)
+        return {"access_token": access_token, "token_type": "bearer"}
 
 @app.get("/users/me")
 async def read_users_me(current_user: schemas.User = Depends(get_current_user)):
@@ -249,7 +242,6 @@ def remove_user(user_id: int, db: Session = Depends(get_db), current_user: schem
 def remove_protocol(protocol_id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
     return crud.del_protocol(db, protocol_id=protocol_id, current_user=current_user)
 
-
 @app.patch("/protocols/", response_model=schemas.Protocol)
 def update_protocol(protocol: schemas.ProtocolUpdate, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
 
@@ -299,9 +291,6 @@ def read_protocol(protocolExp_id:int, db: Session = Depends(get_db), current_use
     item = crud.get_protocolExp(db, protocolExp_id=protocolExp_id)
     return item
 
-
-
-
 #################################
 @app.delete("/protocolExpsEvent/{id}", response_model=bool)
 def remove_protocolExpEvent(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
@@ -344,9 +333,6 @@ async def write_signals(code: str, protocol_exp_id: int,m: int, request: Request
 async def read_signals_bin(code: str, protocol_exp_id: int):
     data=crud.get_protocolExpSignalsBin(k=str(protocol_exp_id).rjust(6, '0')+code.rjust(4, '0'))
     return Response(content=data, media_type="application/octet-stream")
-
-
-
 
 @app.get("/signals/{protocol_exp_id}/{code}", response_model=str)
 def read_signals(code: str, protocol_exp_id: int):
@@ -411,8 +397,6 @@ def create_protocolExpStimulus(protocolExpStimulus: schemas.ProtocolExpStimulusC
 def read_protocolExpStimulus(protocol_exp_id: int, skip: int = 0,  limit: int = 100, db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
     items = crud.get_protocolExpStimulus(db=db, protocol_exp_id=protocol_exp_id, skip=skip, limit=limit)
     return items
-
-
 
 @app.post("/protocolExpTrigger/", response_model=schemas.ProtocolExpTrigger)
 def create_protocolExpTrigger(protocolExpTrigger: schemas.ProtocolExpTriggerCreate , db: Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
@@ -525,7 +509,6 @@ def create_artifact(artifact: schemas.ArtifactCreate, db: Session = Depends(get_
 def update_artifact(artifact_update: schemas.ArtifactUpdate, db: Session = Depends(get_db)):
     return crud.update_artifact(db=db, artifact_update=artifact_update)
 
-
 @app.delete("/artifacts/", response_model=bool)
 def delete_artifact(serial: int, db: Session = Depends(get_db)):
     return crud.delete_artifact(db=db, serial=serial)
@@ -576,7 +559,6 @@ def get_license_keys(skip: int = 0, limit: int = 99999, db: Session = Depends(ge
 @app.post("/signals/", response_model=bool)
 def create_signals(signal_list: List[schemas.SignalCreate], db: Session = Depends(get_db)):
     return crud.create_signal(db, signal_list)
-
 
 @app.post("/api_CPP/", response_model=schemas.SimpleSignal)
 def create_signals(two_signal_list: schemas.TwoSignalList):
@@ -646,7 +628,6 @@ def create_signals(one_signal_list: schemas.OneSignalList):
 @app.post("/api_HF/", response_model=schemas.SimpleSignal)
 def create_signals(one_signal_list: schemas.OneSignalList):
     return crud.get_hf_abs_func(one_signal_list.signalList)
-
 
 @app.post("/api_SD1/", response_model=schemas.SimpleSignal)
 def create_signals(one_signal_list: schemas.OneSignalList):

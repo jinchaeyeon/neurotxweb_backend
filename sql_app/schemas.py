@@ -329,10 +329,10 @@ class UserUpdate(BaseModel):
 class UserBase(BaseModel):
     email: str
     username: str
-    is_staff: bool
+    is_staff: Optional[bool]
     first_name: Optional[str]
     last_name: Optional[str]
-
+    tokens: Optional[str]
 
 class UserResponse(UserBase):
 

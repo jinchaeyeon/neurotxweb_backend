@@ -110,7 +110,7 @@ class User(Base):
     hashed_password = Column(String(555))
     is_active = Column(Boolean, default=True)
     is_staff = Column(Boolean, default=False)
-    tokens = Column(String(255), default=False)
+    tokens = Column(String(255))
     patients = relationship("Patient", back_populates="doctor")
 
 

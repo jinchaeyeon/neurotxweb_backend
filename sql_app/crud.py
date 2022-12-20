@@ -611,21 +611,19 @@ def del_protocolExpEvent(db: Session, protocolExpEvent_id:int, current_user: sch
     return True
 
 def update_user(db: Session, user: schemas.UserUpdate, current_user: schemas.User):
-    if current_user.is_staff:
+    #if current_user.is_staff:
         db_user_update = db.query(models.User).filter(models.User.id == user.id).first()
         if db_user_update:
             if user.email:
                 db_user_update.email = user.email
-            elif user.tokens:
-                db_user_update.tokens = user.tokens
             else:
                 db_user_update.is_staff = user.is_staff
             db.add(db_user_update)
             db.commit()
             db.refresh(db_user_update)
-    else:
-        raise HTTPException(status_code=400, detail="You are not a staff")
-    return db_user_update
+    #else: 
+    #    raise HTTPException(status_code=400, detail="You are not a staff")
+        return db_user_update
 
 
 def del_user(db: Session, user_id: int, current_user: schemas.User):
